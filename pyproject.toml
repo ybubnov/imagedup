@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "imagedup"
+version = "0.1.0"
+description = "Image Duplicates Tool"
+authors = ["Yasha Bubnov <girokompass@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9.16"
+
+opencv-python-headless = "*"
+numpy = "^1.24.3"
+imutils = "*"
+torchdata = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+
+[tool.poetry.scripts]
+imagedup = "imagedup"

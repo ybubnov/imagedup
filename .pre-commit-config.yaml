@@ -1,0 +1,32 @@
+default_language_version:
+    python: python3.9
+repos:
+-   repo: https://github.com/codespell-project/codespell
+    rev: v2.2.1
+    hooks:
+    -   id: codespell
+        name: 'English: grammar'
+-   repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+    -   id: black
+        name: 'Python: auto-format source code'
+-   repo: https://github.com/asottile/reorder_python_imports
+    rev: v3.8.2
+    hooks:
+    -   id: reorder-python-imports
+        name: 'Python: reorder imports'
+        args: [--py38-plus]
+-   repo: https://github.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+    -   id: flake8
+        name: 'Python: linting'
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v2.37.3
+    hooks:
+    -   id: pyupgrade
+        name: 'Python: upgrade'
+        args:
+        -   --py38-plus
+        -   --keep-runtime-typing
