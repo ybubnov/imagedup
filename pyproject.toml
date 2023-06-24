@@ -16,4 +16,4 @@ torchdata = "*"
 pytest = "*"
 
 [tool.poetry.scripts]
-imagedup = "imagedup"
+imagedup = "imagedup.shell:main"

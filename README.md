@@ -36,5 +36,5 @@ By default the tool does not delete files and simply prints the files to delete 
 the standard output. If you want to delete duplicates, consider calling the tool like
 following:
 ```sh
-% python -m imagedup ./dataset -q --rm
+% python -m imagedup.shell ./dataset -q --rm
 ```
