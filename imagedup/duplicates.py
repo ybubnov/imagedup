@@ -26,12 +26,22 @@ class ImageDupFinder(IterDataPipe[str]):
             reach to treat two images as distinct.
         min_area (float): A minimum size of a contour area to include into total score.
             Larger areas capture larger objects, while smaller areas include more noise.
+        width (int): A width of the image that will be scaled to.
+        height (int): A height of the image that will be scaled to.
     """
 
-    def __init__(self, root: str, min_score: float, min_area: float) -> None:
+    def __init__(
+        self,
+        root: str,
+        min_score: float,
+        min_area: float,
+        width: int = 2688,
+        height: int = 1520,
+    ) -> None:
         super().__init__()
 
         self.root = root
+        self.shape = (height, width)
         self.min_score = min_score
         self.min_area = min_area
         self.image_masks = ["*.png", "*.jpg", "*.jpeg"]
@@ -62,6 +72,7 @@ class ImageDupFinder(IterDataPipe[str]):
 
         prev_frame = cv2.imread(metadata_list[0].filepath)
         prev_im = preprocess_image_change_detection(prev_frame)
+        prev_im = cv2.resize(prev_im, self.shape[::-1])
 
         for i in range(1, num_metadata):
             next_frame = cv2.imread(metadata_list[i].filepath)
@@ -72,16 +83,8 @@ class ImageDupFinder(IterDataPipe[str]):
                 continue
 
             next_im = preprocess_image_change_detection(next_frame)
-
-            # For some reason images from the same camera could have different shapes,
-            # consider re-scaling the images to the lower size.
-            if prev_im.shape != next_im.shape:
-                new_shape = (
-                    min(prev_im.shape[0], next_im.shape[0]),
-                    min(prev_im.shape[1], next_im.shape[1]),
-                )
-                prev_im = cv2.resize(prev_im, new_shape)
-                next_im = cv2.resize(next_im, new_shape)
+            if next_im.shape != self.shape:
+                next_im = cv2.resize(next_im, self.shape[::-1])
 
             score, *_ = compare_frames_change_detection(prev_im, next_im, self.min_area)
             if score < self.min_score:

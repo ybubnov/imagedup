@@ -39,14 +39,32 @@ def main() -> int:
     parser.add_argument(
         "-s",
         "--min-score",
-        default=7475,
+        default=25557,
         type=float,
         help="a minimum score in pixels used to distinguish a pair of images",
+    )
+    parser.add_argument(
+        "-W",
+        "--width",
+        default=2688,
+        help="a width of the image to rescale"
+    )
+    parser.add_argument(
+        "-H",
+        "--height",
+        default=1520,
+        help="a height of the image to rescale",
     )
 
     args = parser.parse_args()
 
-    datapipe = ImageDupFinder(args.root, args.min_score, args.min_area)
+    datapipe = ImageDupFinder(
+        args.root,
+        min_score=args.min_score,
+        min_area=args.min_area,
+        width=args.width,
+        height=args.height,
+    )
     for metadata in datapipe:
         filepath = Path(metadata.filepath)
         if not args.quiet:
