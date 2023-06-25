@@ -38,3 +38,11 @@ following:
 ```sh
 % python -m imagedup.shell ./dataset -q --rm
 ```
+
+## Analysis
+
+The following image outlines how exactly the `--min-score` and `--min-area` parameters
+relate to the number of images being removed from the directory.
+
+By default this tool guarantees removal of 50% of the images from a directory.
+![Gris Search](docs/grid_search.png)

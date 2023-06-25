@@ -32,14 +32,14 @@ def main() -> int:
     parser.add_argument(
         "-a",
         "--min-area",
-        default=10000,
+        default=7475,
         type=float,
         help="a minimum area of an object in pixels within diff of two images",
     )
     parser.add_argument(
         "-s",
         "--min-score",
-        default=30000,
+        default=7475,
         type=float,
         help="a minimum score in pixels used to distinguish a pair of images",
     )
