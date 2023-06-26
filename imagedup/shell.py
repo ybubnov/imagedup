@@ -44,10 +44,7 @@ def main() -> int:
         help="a minimum score in pixels used to distinguish a pair of images",
     )
     parser.add_argument(
-        "-W",
-        "--width",
-        default=2688,
-        help="a width of the image to rescale"
+        "-W", "--width", default=2688, help="a width of the image to rescale"
     )
     parser.add_argument(
         "-H",
